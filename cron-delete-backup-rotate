@@ -1,0 +1,1 @@
+0 0 1 * * root find /home/backup/ -type f -mtime +30 -delete > /dev/null 2>&1
