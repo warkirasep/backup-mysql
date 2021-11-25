@@ -1,0 +1,2 @@
+#Backup Setiap Jam 1 Malam
+#Delete Daily Backup yang lebih dari 30 Hari

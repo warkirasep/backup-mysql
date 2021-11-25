@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-soho_config="/var/www/html/core-laravel8/config.php"
+soho_config="/var/www/html/core-laravel8/.env"
 soho_db_user="$(grep -o "dbUser = '[^']*[^']'" "${soho_db_user}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
 soho_db_password="$(grep -o "dbPass = '[^']*[^']'" "${soho_db_password}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
 soho_db_name="$(grep -o "dbName = '[^']*[^']'" "${soho_db_name}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
