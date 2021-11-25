@@ -3,16 +3,15 @@
 set -e
 set -o pipefail
 
-soho_config="/var/www/html/core-laravel8/.env"
-soho_db_user="$(grep -o "DB_USERNAME='[^']*[^']'" "${soho_config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
-#soho_db_user="$(grep -o "DB_USERNAME = '[^']*[^']'" "${soho_config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
+config="/var/www/html/core-laravel8/.env"
+db_user="$(grep -o "DB_USERNAME='[^']*[^']'" "${config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
 
-soho_db_password="$(grep -o "DB_PASSWORD='[^']*[^']'" "${soho_config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
-soho_db_name="$(grep -o "DB_DATABASE='[^']*[^']'" "${soho_config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
-soho_db_host="$(grep -o "DB_HOST='[^']*[^']'" "${soho_config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
+db_password="$(grep -o "DB_PASSWORD='[^']*[^']'" "${config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
+db_name="$(grep -o "DB_DATABASE='[^']*[^']'" "${config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
+db_host="$(grep -o "DB_HOST='[^']*[^']'" "${config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
 # MySQL / MariaDB.
 #docker exec docker_mariadb_1 /opt/bitnami/mariadb/bin/mysqldump -u "${soho_db_user}" \
 #    --password="${soho_db_password}" \
 #    "${soho_db_name}" \ 
 #    | gzip > "/home/backup/$(date +%F)_sendy.sql.gz"
-docker exec docker_mariadb_1 /opt/bitnami/mariadb/bin/mysqldump -u "${soho_db_user}" --password="${soho_db_password}" -h "${soho_db_host}" "${soho_db_name}" | gzip > "/home/backup/$(date +%F)_soho-mobility.sql.gz"
+docker exec docker_mariadb_1 /opt/bitnami/mariadb/bin/mysqldump -u "${db_user}" --password="${db_password}" -h "${db_host}" "${db_name}" | gzip > "/home/backup/$(date +%F)_backup.sql.gz"
