@@ -9,7 +9,7 @@ soho_db_password="$(grep -o "DB_PASSWORD = '[^']*[^']'" "${soho_config}" | cut -
 soho_db_name="$(grep -o "DB_DATABASE = '[^']*[^']'" "${soho_config}" | cut -d "=" -f 2 | sed "s/'//g;s/ //g")"
 
 # MySQL / MariaDB.
-/usr/bin/mysqldump -u "${soho_db_user}" \
+docker exec docker_mariadb_1 /usr/bin/mysqldump -u "${soho_db_user}" \
     -p"${soho_db_password}" \
     "${soho_db_name}" \
     | gzip > "/home/backup/$(date +%F)_sendy.sql.gz"
