@@ -7,3 +7,6 @@ Copy File "daily-backup" to /usr/local/bin/
 CHMOD File "chmod a+x /usr/local/bin/cron-backup"
 COPY File "cron-backup" to /etc/cron.d
 COPY File "cron-delete-backup-rotate" to /etc/cron.d
+
+#Restore DB_DATABASE
+gunzip < backup.sql.gz | docker exec -i CONTAINER /usr/bin/mysql -u root -pPASSWORD DATABASE
